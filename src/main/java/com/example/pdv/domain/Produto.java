@@ -1,17 +1,27 @@
 package com.example.pdv.domain;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+@Entity
+@Table(name =  "produto")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Produto {
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(nullable = false)
     private String descricao;
-    private Double preco;
+
+    @Column(nullable = false)
+    private BigDecimal preco;
+
+    @Column(nullable = false)
     private String categoria;
 }
 
-/*
-CREATE TABLE produto(
-	id SERIAL PRIMARY KEY,
-	descricao VARCHAR(100) NOT NULL,
-	valor NUMERIC(10, 2) NOT NULL,
-	categoria VARCHAR NOT NULL
-);
-* */
