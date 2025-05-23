@@ -1,0 +1,51 @@
+Diferença entre SOAP e REST: SOAP é um protocolo formal com regras estritas e maior overhead,
+enquanto REST é uma abordagem arquitetural mais simples, flexível e eficiente para comunicação
+via web.
+
+Definição: Simple Object Access Protocol (SOAP) e Representational State Transfer (REST).
+
+Para utilizar um protocolo HTTP: 5 regras.
+1. Dê a todas as coisas um identificador [URL].
+2. Utilize protocolo HTTP para definir as ações e suas respostas[HTTP].
+3. Recursos com múltiplas representações [MIME].
+4. Comunique sem estado [Stateless].
+5. Vincule as coisas [links].
+
+
+Principais protocolos:
+200
+201
+202
+204
+400
+401
+404
+500
+
+
+Criação das entidades:
+
+
+
+Criação do repository:
+No repository, utilizar a anotação @Repository permite que deixemos de lado o CRUD básico sendo necessário apenas
+implementar consultas personalizadas. Algumas dessas consultas podem ser estruturadas automaticamente pelo JPA.
+Para isso basta utilizar as nomenclaturas padrões para estruturas os métodos. Exemplos:
+- Palavras-chave: findBy, getBy.
+- Condições: containing, equals, between.
+- Condições lógicas: and, or.
+- Ordenação: desc, asc.
+Na declaração da classe "public interface ClienteRepository extends JpaRepository<Cliente, Integer>", pode-se dizer
+que o ClienteRepository herda da interface JpaRepository que recebe dois parâmetros: a entidade e o identificador único
+desta entidade. Essa herança traz os métodos CRUD básicos (save, findById, findAll, delete). O "update" fica por conta
+do "save", caso passado o parâmetro 'id' na requisição. Caso não seja passado, o "save" realiza o "create".
+
+
+Criação do service:
+Necessário utilizar a anotação @Service. A primeira declaração deve ser a injeção da dependência do repository, isso
+ocorre através da anotação @Autowired, fazendo com que o service receba os dados do repository. Em outras palavras
+remove a necessidade de um construtor, por exemplo.
+
+
+
+
