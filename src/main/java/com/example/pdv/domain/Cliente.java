@@ -28,7 +28,7 @@ public class Cliente {
         this.email = dto.getEmail();
     }
 
-    public Cliente(Integer id, Cliente dto){
+    public Cliente(Integer id, ClienteDTO dto){
         this.id = id;
         this.nome = dto.getNome();
         this.telefone = dto.getTelefone();

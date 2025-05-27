@@ -35,4 +35,23 @@ public class ClienteController {
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping
+    public ResponseEntity<List<Cliente>> findAll(){
+        List<Cliente> listaClientes = service.findAll();
+        return ResponseEntity.ok(listaClientes);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody @Valid ClienteDTO dto){
+        Cliente cliente = new Cliente(id, dto);
+        cliente = service.update(cliente);
+        return ResponseEntity.ok(cliente);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
