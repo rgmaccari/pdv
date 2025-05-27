@@ -1,5 +1,6 @@
 package com.example.pdv.domain;
 
+import com.example.pdv.dto.ClienteDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +21,18 @@ public class Cliente {
     private String telefone;
 
     private String email;
+
+    public Cliente(ClienteDTO dto){
+        this.nome = dto.getNome();
+        this.telefone = dto.getTelefone();
+        this.email = dto.getEmail();
+    }
+
+    public Cliente(Integer id, Cliente dto){
+        this.id = id;
+        this.nome = dto.getNome();
+        this.telefone = dto.getTelefone();
+        this.email = dto.getEmail();
+    }
 }
 

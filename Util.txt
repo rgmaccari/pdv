@@ -13,18 +13,29 @@ Para utilizar um protocolo HTTP: 5 regras.
 
 
 Principais protocolos:
-200
-201
-202
-204
-400
-401
-404
-500
+200 (OK): Requisição bem-sucedida, retorna os dados solicitados.
+201 (Created): Recurso criado com sucesso, retorna o recurso e a URI (ex.: via Location).
+202 (Accepted): Requisição aceita para processamento, mas não concluída.
+204 (No Content): Requisição bem-sucedida, sem dados no corpo da resposta.
+400 (Bad Request): Requisição inválida, erro no formato ou dados enviados.
+401 (Unauthorized): Autenticação necessária ou falhou.
+404 (Not Found): Recurso solicitado não encontrado.
+500 (Internal Server Error): Erro inesperado no servidor.
 
 
 Criação das entidades:
+Utilizar a anotação @Entity e @Table(name = "cliente")
+Cliente, utilizando lombok para getters e setters (e construtores?).
+Anotações referenciando as colunas nos banco de dados em cada atributo:
+    Id: @Id e @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    Atributos quaisquer: @Column(nullable = false)
+    Tem outras também importantes como:
 
+No DTO:
+Criar os atributos, com getters e setters gerados pelo lombok.
+Utilizar as anotações para validação como:
+    @NotNull: utilizado para qualquer tipo de dado que não possa ser nulo.
+    @NotEmpty e @NotBlank: utilizados para qualquer String que não possa ser vazia (meio iguais).
 
 
 Criação do repository:
@@ -42,10 +53,34 @@ do "save", caso passado o parâmetro 'id' na requisição. Caso não seja passad
 
 
 Criação do service:
-Necessário utilizar a anotação @Service. A primeira declaração deve ser a injeção da dependência do repository, isso
-ocorre através da anotação @Autowired, fazendo com que o service receba os dados do repository. Em outras palavras
-remove a necessidade de um construtor, por exemplo.
+Necessário utilizar a anotação @Service. A primeira declaração deve ser a injeção da dependência do repository:
+    @Autowired: faz com que o service receba os dados do repository. Em outras palavras remove a necessidade de um
+    construtor, por exemplo.
 
+Criação do controller:
+Anotar com:
+    @Controller: indica que é um Controller;
+    @RequestMapping("/cliente") indicando o end-point.
+
+    @Autowired: instaciar as dependências Service da mesma forma que o Service faz com o Repository.
+
+    @PostMapping: insert;
+    @PutMapping: update;
+    @GetMapping: findAll;
+    @GetMapping("{id}"): findById;
+    @DeleteMapping("{id}"): para deletar;
+
+A partir daqui começa a ficar paia:
+No insert:
+    @RequestBody @Valid ProdutoRequestDTO produtoRequestDTO:
+        Recebe um objeto ProdutoRequestDTO no corpo da requisição (em JSON).
+        A anotação @Valid ativa a validação dos campos do DTO (ex.: @NotNull, @NotBlank).
+
+    UriComponentsBuilder builder: É usado para criar a URL do recurso recém-criado (Cliente).
+    URI uri = builder.path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri():
+        Gera uma URL como http://localhost:8080/cliente/123.
+
+    Retorno ResponseEntity<Cliente>: Retorna uma resposta HTTP com status 201 Created.
 
 
 
