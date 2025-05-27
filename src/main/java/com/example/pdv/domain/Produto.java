@@ -1,5 +1,6 @@
 package com.example.pdv.domain;
 
+import com.example.pdv.dto.ProdutoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,22 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false)
-    private BigDecimal preco;
+    private BigDecimal valor;
 
     @Column(nullable = false)
     private String categoria;
+
+    public Produto(ProdutoDTO dto){
+        this.descricao = dto.getDescricao();
+        this.valor = dto.getValor();
+        this.categoria = dto.getCategoria();
+    }
+
+    public Produto(Integer id, ProdutoDTO dto){
+        this.id = id;
+        this.descricao = dto.getDescricao();
+        this.valor = dto.getValor();
+        this.categoria = dto.getCategoria();
+    }
 }
 

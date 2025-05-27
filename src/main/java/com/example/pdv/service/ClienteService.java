@@ -12,25 +12,25 @@ import java.util.Optional;
 @Service
 public class ClienteService {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteRepository repository;
 
     public Cliente insert(Cliente cliente){
-        return clienteRepository.save(cliente);
+        return repository.save(cliente);
     }
 
     public Cliente update(Cliente cliente){
-        return clienteRepository.save(cliente);
+        return repository.save(cliente);
     }
 
     public Optional<Cliente> findById(Integer id){
-        return clienteRepository.findById(id);
+        return repository.findById(id);
     }
 
     public List<Cliente> findAll(){
-        return clienteRepository.findAll();
+        return repository.findAll();
     }
 
     public void delete(Integer id){
-        clienteRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
