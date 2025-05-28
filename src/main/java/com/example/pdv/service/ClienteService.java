@@ -23,7 +23,13 @@ public class ClienteService {
     }
 
     public Optional<Cliente> findById(Integer id){
-        return repository.findById(id);
+        Optional<Cliente> cliente = repository.findById(id);
+
+        if(cliente.isPresent()){
+            return cliente;
+        }else{
+            return null;
+        }
     }
 
     public List<Cliente> findAll(){
