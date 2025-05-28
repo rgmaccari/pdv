@@ -41,4 +41,13 @@ public class Venda {
         this.cliente = dto.getCliente();
         this.itensVenda = dto.getItensVenda();
     }
+
+    public Venda(Integer id, VendaDTO dto){
+        this.id = id;
+        this.observacao = dto.getObservacao();
+        this.total = dto.getTotal();
+        this.data = dto.getData();
+        this.cliente = dto.getCliente();
+        this.itensVenda = dto.getItensVenda();
+    }
 }
