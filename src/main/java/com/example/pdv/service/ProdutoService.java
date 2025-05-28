@@ -27,7 +27,13 @@ public class ProdutoService {
     }
 
     public Optional<Produto> findById(Integer id){
-        return repository.findById(id);
+        Optional<Produto> produto = repository.findById(id);
+
+        if(produto.isPresent()){
+            return produto;
+        }else{
+            return null;
+        }
     }
 
     public void delete(Integer id){
