@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProdutoDTO {
     @NotBlank
     @Size(min = 3, max = 60)
@@ -23,6 +20,30 @@ public class ProdutoDTO {
     private BigDecimal valor;
 
     @NotBlank
-    @Size(min = 3, max = 10)
+    @Size(min = 3, max = 20)
     private String categoria;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }

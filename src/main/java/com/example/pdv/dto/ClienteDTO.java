@@ -3,9 +3,6 @@ package com.example.pdv.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class ClienteDTO {
     @NotNull
     @NotBlank
@@ -15,8 +12,35 @@ public class ClienteDTO {
     @NotNull
     @NotEmpty
     @Size(min = 8, max = 11)
+    //Anotação Pattern aceita validações regex - expressões regulares para validação de strings. Essa expressão valida se a string contem apenas números.
+    //Além disso, personalizamos a mensagem, pois se não, ela não fica clara para o usuário.
+    @Pattern(regexp = "^\\d+$", message = "Deve conter apenas números.")
     private String telefone;
 
     @Email(message = "Informe um e-mail válido.")
     private String email;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
