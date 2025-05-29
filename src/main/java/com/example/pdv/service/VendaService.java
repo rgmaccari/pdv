@@ -26,6 +26,9 @@ public class VendaService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     public Venda insert(VendaDTO dto){
         Venda venda = new Venda();
 
@@ -46,8 +49,10 @@ public class VendaService {
             }
         }
 
+        Optional<Cliente> clienteDto = clienteRepository.findById(dto.getClienteId());
+        Cliente cliente = clienteDto.get();
+
         String observacoes = dto.getObservacao();
-        Cliente cliente = dto.getCliente();
         Date data = dto.getData();
         BigDecimal valorTotal = dto.getTotal();
 
