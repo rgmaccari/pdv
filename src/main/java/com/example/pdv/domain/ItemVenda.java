@@ -1,5 +1,6 @@
 package com.example.pdv.domain;
 
+import com.example.pdv.dto.ItemVendaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,12 @@ public class ItemVenda {
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
+
+    public ItemVenda(ItemVendaDTO dto) {
+        this.quantidade = dto.getQuantidade();
+        this.valorUnitario = dto.getValorUnitario();
+        this.valorTotal = dto.getValorTotal();
+    }
 }
 
 
