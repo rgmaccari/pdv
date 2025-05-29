@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Data
 public class VendaDTO {
 
     private String observacao;
@@ -28,4 +27,55 @@ public class VendaDTO {
     private List<ItemVendaDTO> itensVenda;
 
     private Cliente cliente;
+
+    public VendaDTO() {
+    }
+
+    public VendaDTO(String observacao, Date data, BigDecimal total, List<ItemVendaDTO> itensVenda, Cliente cliente) {
+        this.observacao = observacao;
+        this.data = data;
+        this.total = total;
+        this.itensVenda = itensVenda;
+        this.cliente = cliente;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public List<ItemVendaDTO> getItensVenda() {
+        return itensVenda;
+    }
+
+    public void setItensVenda(List<ItemVendaDTO> itensVenda) {
+        this.itensVenda = itensVenda;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }

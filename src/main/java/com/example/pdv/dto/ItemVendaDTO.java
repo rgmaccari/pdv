@@ -13,7 +13,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data
 public class ItemVendaDTO {
     @NotNull
     @PositiveOrZero
@@ -29,4 +28,46 @@ public class ItemVendaDTO {
 
     @NotNull
     private Integer produtoId;
+
+    public ItemVendaDTO() {
+    }
+
+    public ItemVendaDTO(Integer quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, Integer produtoId) {
+        this.quantidade = quantidade;
+        this.valorUnitario = valorUnitario;
+        this.valorTotal = valorTotal;
+        this.produtoId = produtoId;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public BigDecimal getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(BigDecimal valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Integer getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(Integer produtoId) {
+        this.produtoId = produtoId;
+    }
 }
