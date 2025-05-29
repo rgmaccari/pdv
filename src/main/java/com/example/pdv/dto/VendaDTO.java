@@ -25,7 +25,7 @@ public class VendaDTO {
     private BigDecimal total;
 
     @NotEmpty
-    private List<ItemVenda> itensVenda;
+    private List<ItemVendaDTO> itensVenda;
 
     private Cliente cliente;
 }

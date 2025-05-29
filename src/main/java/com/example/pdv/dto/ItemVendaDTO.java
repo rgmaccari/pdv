@@ -28,8 +28,5 @@ public class ItemVendaDTO {
     private BigDecimal valorTotal;
 
     @NotNull
-    private Venda venda;
-
-    @NotNull
-    private Produto produto;
+    private Integer produtoId;
 }
