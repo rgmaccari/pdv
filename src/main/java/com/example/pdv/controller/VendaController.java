@@ -42,7 +42,7 @@ public class VendaController {
     //TODO: Fazer get by ID
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@RequestParam Integer id){
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
