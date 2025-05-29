@@ -27,7 +27,7 @@ public class VendaController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Venda> update(@RequestParam Integer id, VendaDTO dto){
+    public ResponseEntity<Venda> update(@PathVariable Integer id, VendaDTO dto){
         Venda venda = new Venda(id, dto);
         venda = service.update(venda);
         return ResponseEntity.ok(venda);
@@ -42,7 +42,7 @@ public class VendaController {
     //TODO: Fazer get by ID
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@RequestParam Integer id){
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
