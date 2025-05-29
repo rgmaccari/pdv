@@ -39,7 +39,11 @@ public class VendaController {
         return ResponseEntity.ok(listaVendas);
     }
 
-    //TODO: Fazer get by ID
+    @GetMapping("{id}")
+    public ResponseEntity<Venda> findById(@PathVariable Integer id){
+        Venda venda = service.findById(id);
+        return ResponseEntity.ok(venda);
+    }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
