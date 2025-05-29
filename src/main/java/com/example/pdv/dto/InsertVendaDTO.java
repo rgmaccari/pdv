@@ -1,8 +1,5 @@
 package com.example.pdv.dto;
 
-import com.example.pdv.domain.Cliente;
-import com.example.pdv.domain.ItemVenda;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class VendaDTO {
+public class InsertVendaDTO {
 
     @Size(max = 200)
     private String observacao;

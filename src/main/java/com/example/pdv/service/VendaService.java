@@ -5,7 +5,8 @@ import com.example.pdv.domain.ItemVenda;
 import com.example.pdv.domain.Produto;
 import com.example.pdv.domain.Venda;
 import com.example.pdv.dto.ItemVendaDTO;
-import com.example.pdv.dto.VendaDTO;
+import com.example.pdv.dto.InsertVendaDTO;
+import com.example.pdv.dto.UpdateVendaDTO;
 import com.example.pdv.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class VendaService {
     @Autowired
     private ClienteService clienteService;
 
-    public Venda insert(VendaDTO dto){
+    public Venda insert(InsertVendaDTO dto){
         Venda venda = new Venda(dto);
 
         List<ItemVenda> listaItens = new ArrayList<>();
@@ -48,8 +49,16 @@ public class VendaService {
         return venda;
     }
 
-    public Venda update(Venda venda){
-        return vendaRepository.save(venda);
+    public Venda update(Integer id, UpdateVendaDTO dto){
+        Optional<Venda> venda = vendaRepository.findById(id);
+        Venda vendaAtualizada = new Venda();
+        vendaAtualizada = venda.get();
+
+        vendaAtualizada.setObservacao(dto.getObservacao());
+        vendaAtualizada.setData(dto.getData());
+
+
+        return vendaRepository.save(vendaAtualizada);
     }
 
     public List<Venda> findAll(){

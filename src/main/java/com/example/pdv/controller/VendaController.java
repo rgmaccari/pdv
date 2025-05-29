@@ -1,7 +1,8 @@
 package com.example.pdv.controller;
 
 import com.example.pdv.domain.Venda;
-import com.example.pdv.dto.VendaDTO;
+import com.example.pdv.dto.InsertVendaDTO;
+import com.example.pdv.dto.UpdateVendaDTO;
 import com.example.pdv.service.VendaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class VendaController {
     private VendaService service;
 
     @PostMapping
-    public ResponseEntity<Venda> insert(@RequestBody @Valid VendaDTO dto, UriComponentsBuilder builder){
+    public ResponseEntity<Venda> insert(@RequestBody @Valid InsertVendaDTO dto, UriComponentsBuilder builder){
         Venda venda = service.insert(dto);
 
         URI uri = builder.path("/vendas/{id}").buildAndExpand(venda.getId()).toUri();
@@ -27,9 +28,8 @@ public class VendaController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Venda> update(@RequestParam Integer id, VendaDTO dto){
-        Venda venda = new Venda(id, dto);
-        venda = service.update(venda);
+    public ResponseEntity<Venda> update(@PathVariable Integer id, @Valid @RequestBody UpdateVendaDTO dto){
+        Venda venda = service.update(id, dto);
         return ResponseEntity.ok(venda);
     }
 

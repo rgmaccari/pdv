@@ -1,10 +1,11 @@
 package com.example.pdv.domain;
 
-import com.example.pdv.dto.VendaDTO;
+import com.example.pdv.dto.InsertVendaDTO;
+import com.example.pdv.dto.UpdateVendaDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -32,18 +33,25 @@ public class Venda {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ItemVenda> itensVenda;
 
-    public Venda(VendaDTO dto){
+    public Venda(InsertVendaDTO dto){
         this.observacao = dto.getObservacao();
         this.total = dto.getTotal();
         this.data = dto.getData();
     }
 
-    public Venda(Integer id, VendaDTO dto){
+    public Venda(Integer id, InsertVendaDTO dto){
         this.id = id;
         this.observacao = dto.getObservacao();
         this.total = dto.getTotal();
+        this.data = dto.getData();
+    }
+
+    public Venda(Integer id, UpdateVendaDTO dto){
+        this.id = id;
+        this.observacao = dto.getObservacao();
         this.data = dto.getData();
     }
 }
