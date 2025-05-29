@@ -3,9 +3,11 @@ package com.example.pdv.dto;
 import com.example.pdv.domain.Cliente;
 import com.example.pdv.domain.ItemVenda;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class VendaDTO {
 
+    @Size(max = 200)
     private String observacao;
 
     @NotNull
@@ -24,19 +27,21 @@ public class VendaDTO {
     private BigDecimal total;
 
     @NotEmpty
-    private List<ItemVendaDTO> itensVenda;
+    //@Valid aqui para que seja validado os itens da lista. Se não o validation bean ignora.
+    private List<@Valid ItemVendaDTO> itensVenda;
 
-    private Cliente cliente;
+    @NotNull
+    private Integer clienteId;
 
     public VendaDTO() {
     }
 
-    public VendaDTO(String observacao, Date data, BigDecimal total, List<ItemVendaDTO> itensVenda, Cliente cliente) {
+    public VendaDTO(String observacao, Date data, BigDecimal total, List<ItemVendaDTO> itensVenda, Integer clienteId) {
         this.observacao = observacao;
         this.data = data;
         this.total = total;
         this.itensVenda = itensVenda;
-        this.cliente = cliente;
+        this.clienteId = clienteId;
     }
 
     public String getObservacao() {
@@ -71,11 +76,11 @@ public class VendaDTO {
         this.itensVenda = itensVenda;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Integer getClienteId() {
+        return clienteId;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClienteId(Integer clienteId) {
+        this.clienteId = clienteId;
     }
 }

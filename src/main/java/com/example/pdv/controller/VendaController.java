@@ -39,6 +39,8 @@ public class VendaController {
         return ResponseEntity.ok(listaVendas);
     }
 
+    //TODO: Fazer get by ID
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@RequestParam Integer id){
         service.delete(id);

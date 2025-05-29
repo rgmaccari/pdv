@@ -1,5 +1,6 @@
 package com.example.pdv.domain;
 
+import com.example.pdv.dto.ItemVendaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,6 +33,12 @@ public class ItemVenda {
     private Produto produto;
 
     public ItemVenda() {
+    }
+
+    public ItemVenda(ItemVendaDTO dto) {
+        this.quantidade = dto.getQuantidade();
+        this.valorUnitario = dto.getValorUnitario();
+        this.valorTotal = dto.getValorTotal();
     }
 
     public ItemVenda(Integer id, Integer quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, Venda venda, Produto produto) {

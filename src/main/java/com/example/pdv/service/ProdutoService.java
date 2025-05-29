@@ -21,7 +21,7 @@ public class ProdutoService {
 
     public Produto update(Produto produto){
         if(!repository.existsById(produto.getId()))
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Produto id " + produto.getId() + " não encontrado.");
 
         return repository.save(produto);
     }
@@ -30,7 +30,7 @@ public class ProdutoService {
         List<Produto> produtos = repository.findAll();
 
         if(produtos.isEmpty())
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Nenhum produto encontrado.");
 
         return produtos;
     }
@@ -39,14 +39,14 @@ public class ProdutoService {
         Optional<Produto> produto = repository.findById(id);
 
         if(produto.isEmpty())
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Produto id " + id + " não encontrado.");
 
         return produto.get(); //Extrai o produto do Optional.
     }
 
     public void delete(Integer id){
         if(!repository.existsById(id))
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Produto id " + id + " não encontrado.");
 
         repository.deleteById(id);
     }

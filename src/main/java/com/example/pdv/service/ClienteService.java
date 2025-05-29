@@ -21,7 +21,7 @@ public class ClienteService {
 
     public Cliente update(Cliente cliente){
         if(!repository.existsById(cliente.getId()))
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Cliente id " + cliente.getId() + " não encontrado.");
 
         return repository.save(cliente);
     }
@@ -30,7 +30,7 @@ public class ClienteService {
         Optional<Cliente> cliente = repository.findById(id);
 
         if(cliente.isEmpty())
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Cliente id " + id + " não encontrado.");
 
         return cliente.get(); //.get extrai o cliente de dentro do Optional<>
     }
@@ -39,14 +39,14 @@ public class ClienteService {
         List<Cliente> clientes = repository.findAll();
 
         if(clientes.isEmpty())
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Nenhum cliente encontrado");
 
         return clientes;
     }
 
     public void delete(Integer id){
         if(!repository.existsById(id))
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("Cliente id " + id + " não encontrado.");
 
         repository.deleteById(id);
     }
