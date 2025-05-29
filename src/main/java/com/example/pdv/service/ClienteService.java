@@ -3,6 +3,7 @@ package com.example.pdv.service;
 import com.example.pdv.domain.Cliente;
 import com.example.pdv.repository.ClienteRepository;
 import com.example.pdv.repository.ProdutoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,24 +20,34 @@ public class ClienteService {
     }
 
     public Cliente update(Cliente cliente){
+        if(!repository.existsById(cliente.getId()))
+            throw new EntityNotFoundException();
+
         return repository.save(cliente);
     }
 
-    public Optional<Cliente> findById(Integer id){
+    public Cliente findById(Integer id){
         Optional<Cliente> cliente = repository.findById(id);
 
-        if(cliente.isPresent()){
-            return cliente;
-        }else{
-            return null;
-        }
+        if(cliente.isEmpty())
+            throw new EntityNotFoundException();
+
+        return cliente.get(); //.get extrai o cliente de dentro do Optional<>
     }
 
     public List<Cliente> findAll(){
-        return repository.findAll();
+        List<Cliente> clientes = repository.findAll();
+
+        if(clientes.isEmpty())
+            throw new EntityNotFoundException();
+
+        return clientes;
     }
 
     public void delete(Integer id){
+        if(!repository.existsById(id))
+            throw new EntityNotFoundException();
+
         repository.deleteById(id);
     }
 }

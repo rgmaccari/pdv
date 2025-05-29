@@ -43,8 +43,8 @@ public class ProdutoController {
 
     @GetMapping("{id}")
     public ResponseEntity<Produto> findById(@PathVariable Integer id){
-        Optional<Produto> produto = service.findById(id);
-        return produto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Produto produto = service.findById(id);
+        return ResponseEntity.ok(produto);
     }
 
     @DeleteMapping("{id}")
