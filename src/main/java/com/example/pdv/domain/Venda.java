@@ -35,7 +35,6 @@ public class Venda {
         this.observacao = dto.getObservacao();
         this.total = dto.getTotal();
         this.data = dto.getData();
-        this.cliente = dto.getCliente();
     }
 
     public Venda(Integer id, VendaDTO dto){
@@ -43,7 +42,6 @@ public class Venda {
         this.observacao = dto.getObservacao();
         this.total = dto.getTotal();
         this.data = dto.getData();
-        this.cliente = dto.getCliente();
     }
 
     public Venda() {
