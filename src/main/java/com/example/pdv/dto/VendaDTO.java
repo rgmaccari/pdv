@@ -31,5 +31,6 @@ public class VendaDTO {
     //@Valid aqui para que seja validado os itens da lista. Se não o validation bean ignora.
     private List<@Valid ItemVendaDTO> itensVenda;
 
+    @NotNull
     private Integer clienteId;
 }
