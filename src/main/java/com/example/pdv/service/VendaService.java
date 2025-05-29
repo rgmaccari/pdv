@@ -6,15 +6,11 @@ import com.example.pdv.domain.Produto;
 import com.example.pdv.domain.Venda;
 import com.example.pdv.dto.ItemVendaDTO;
 import com.example.pdv.dto.VendaDTO;
-import com.example.pdv.repository.ClienteRepository;
-import com.example.pdv.repository.ProdutoRepository;
 import com.example.pdv.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,43 +20,29 @@ public class VendaService {
     private VendaRepository vendaRepository;
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProdutoService produtoService;
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     public Venda insert(VendaDTO dto){
-        Venda venda = new Venda();
+        Venda venda = new Venda(dto);
 
         List<ItemVenda> listaItens = new ArrayList<>();
         for(ItemVendaDTO itemDto : dto.getItensVenda()){
-            Optional<Produto> produto = produtoRepository.findById(itemDto.getProdutoId());
-            if(produto.isPresent()){
-                ItemVenda itemVenda = new ItemVenda();
-                itemVenda.setQuantidade(itemDto.getQuantidade());
-                itemVenda.setValorUnitario(itemDto.getValorUnitario());
-                itemVenda.setValorTotal(itemDto.getValorTotal());
-                itemVenda.setVenda(venda);
-                itemVenda.setProduto(produto.get());
+            Produto produto = produtoService.findById(itemDto.getProdutoId());
 
-                listaItens.add(itemVenda);
-            }else{
-                return null;
-            }
+            ItemVenda itemVenda = new ItemVenda(itemDto);
+            itemVenda.setVenda(venda);
+            itemVenda.setProduto(produto);
+
+            listaItens.add(itemVenda);
         }
 
-        Optional<Cliente> clienteDto = clienteRepository.findById(dto.getClienteId());
-        Cliente cliente = clienteDto.get();
-
-        String observacoes = dto.getObservacao();
-        Date data = dto.getData();
-        BigDecimal valorTotal = dto.getTotal();
+        Cliente cliente = clienteService.findById(dto.getClienteId());
 
         venda.setCliente(cliente);
-        venda.setData(data);
-        venda.setObservacao(observacoes);
         venda.setItensVenda(listaItens);
-        venda.setTotal(valorTotal);
 
         venda = vendaRepository.save(venda);
         return venda;
