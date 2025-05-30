@@ -35,8 +35,14 @@ public class ClienteService {
         return cliente.get(); //.get extrai o cliente de dentro do Optional<>
     }
 
-    public List<Cliente> findAll(){
-        List<Cliente> clientes = repository.findAll();
+    public List<Cliente> findAll(String nome){
+        List<Cliente> clientes;
+
+        if(nome == null || nome.isBlank()){
+            clientes = repository.findAll();
+        }else {
+            clientes = repository.findAllByNomeContainingIgnoreCaseOrderByNome(nome);
+        }
 
         if(clientes.isEmpty())
             throw new EntityNotFoundException("Nenhum cliente encontrado");

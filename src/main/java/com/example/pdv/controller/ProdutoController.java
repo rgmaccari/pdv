@@ -36,8 +36,10 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Produto>> findAll(){
-        List<Produto> listaProdutos = service.findAll();
+    public ResponseEntity<List<Produto>> findAll(
+            @RequestParam(value = "descricao", required = false) String descricao){
+
+        List<Produto> listaProdutos = service.findAll(descricao);
         return ResponseEntity.ok(listaProdutos);
     }
 
