@@ -32,8 +32,7 @@ public class Venda {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemVenda> itensVenda;
 
     public Venda(InsertVendaDTO dto){
@@ -46,12 +45,10 @@ public class Venda {
         this.id = id;
         this.observacao = dto.getObservacao();
         this.total = dto.getTotal();
-        this.data = dto.getData();
     }
 
     public Venda(Integer id, UpdateVendaDTO dto){
         this.id = id;
         this.observacao = dto.getObservacao();
-        this.data = dto.getData();
     }
 }

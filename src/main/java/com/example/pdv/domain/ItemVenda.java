@@ -1,6 +1,7 @@
 package com.example.pdv.domain;
 
-import com.example.pdv.dto.ItemVendaDTO;
+import com.example.pdv.dto.InsertItemVendaDTO;
+import com.example.pdv.dto.UpdateItemVendaDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,10 +36,21 @@ public class ItemVenda {
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
-    public ItemVenda(ItemVendaDTO dto) {
+    public ItemVenda(InsertItemVendaDTO dto, Venda venda, Produto produto) {
         this.quantidade = dto.getQuantidade();
         this.valorUnitario = dto.getValorUnitario();
         this.valorTotal = dto.getValorTotal();
+        this.venda = venda;
+        this.produto = produto;
+    }
+
+    public ItemVenda(UpdateItemVendaDto dto, Venda venda, Produto produto) {
+        this.id = dto.getId();
+        this.quantidade = dto.getQuantidade();
+        this.valorUnitario = dto.getValorUnitario();
+        this.valorTotal = dto.getValorTotal();
+        this.venda = venda;
+        this.produto = produto;
     }
 }
 

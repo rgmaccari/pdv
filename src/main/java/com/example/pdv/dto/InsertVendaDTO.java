@@ -26,7 +26,7 @@ public class InsertVendaDTO {
 
     @NotEmpty
     //@Valid aqui para que seja validado os itens da lista. Se não o validation bean ignora.
-    private List<@Valid ItemVendaDTO> itensVenda;
+    private List<@Valid InsertItemVendaDTO> itensVenda;
 
     @NotNull
     private Integer clienteId;
