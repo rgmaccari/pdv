@@ -26,8 +26,14 @@ public class ProdutoService {
         return repository.save(produto);
     }
 
-    public List<Produto> findAll(){
-        List<Produto> produtos = repository.findAll();
+    public List<Produto> findAll(String descricao){
+        List<Produto> produtos;
+
+        if(descricao == null || descricao.isBlank()){
+            produtos = repository.findAll();
+        }else {
+            produtos = repository.findAllByDescricaoContainingIgnoreCaseOrderByDescricao(descricao);
+        }
 
         if(produtos.isEmpty())
             throw new EntityNotFoundException("Nenhum produto encontrado.");
