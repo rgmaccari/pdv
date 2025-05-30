@@ -36,8 +36,8 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> findAll(){
-        List<Cliente> listaClientes = service.findAll();
+    public ResponseEntity<List<Cliente>> findAll(@RequestParam(value = "nome", required = false) String nome){
+        List<Cliente> listaClientes = service.findAll(nome);
         return ResponseEntity.ok(listaClientes);
     }
 
