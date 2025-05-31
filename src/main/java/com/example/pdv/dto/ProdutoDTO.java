@@ -21,7 +21,7 @@ public class ProdutoDTO {
     private BigDecimal valor;
 
     @NotBlank
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 60)
     private String categoria;
 
     public String getDescricao() {

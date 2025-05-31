@@ -19,6 +19,7 @@ public class ClienteDTO {
 
     @Email
     @NotBlank
+    @Size(max = 255)
     private String email;
 
     public String getNome() {

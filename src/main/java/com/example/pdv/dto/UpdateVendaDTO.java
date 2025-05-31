@@ -13,7 +13,7 @@ import java.util.List;
 
 @Data
 public class UpdateVendaDTO {
-    @Size(max = 200)
+    @Size(max = 255)
     private String observacao;
 
     @PositiveOrZero

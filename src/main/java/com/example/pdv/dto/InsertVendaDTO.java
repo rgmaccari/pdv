@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class InsertVendaDTO {
 
-    @Size(max = 200)
+    @Size(max = 255)
     private String observacao;
 
     @NotNull
