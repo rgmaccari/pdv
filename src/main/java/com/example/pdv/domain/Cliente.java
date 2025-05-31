@@ -20,6 +20,7 @@ public class Cliente {
     @Column(nullable = false)
     private String telefone;
 
+    @Column(nullable = false)
     private String email;
 
     public Cliente(ClienteDTO dto){
