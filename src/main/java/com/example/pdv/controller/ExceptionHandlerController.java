@@ -3,6 +3,7 @@ package com.example.pdv.controller;
 import com.example.pdv.dto.ApiExceptionDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.EntityFilterException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -39,8 +40,18 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity handleEntityNotFoundException(EntityNotFoundException e){
+    public ResponseEntity<ApiExceptionDTO> handleEntityNotFoundException(EntityNotFoundException e){
+        ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(e.getMessage());
+
         //notFound do response entity não aceita body.
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiExceptionDTO);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiExceptionDTO> handleDataIntegrityViolationException(DataIntegrityViolationException e){
+        ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO("Você está tentando excluir um recurso que possúi vinculo, " +
+                "com outro recurso do sistema. Contate o suporte.");
+
+        return ResponseEntity.badRequest().body(apiExceptionDTO);
     }
 }

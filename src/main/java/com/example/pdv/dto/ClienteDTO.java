@@ -17,7 +17,8 @@ public class ClienteDTO {
     @Pattern(regexp = "^\\d+$", message = "Deve conter apenas números.")
     private String telefone;
 
-    @Email(message = "Informe um e-mail válido.")
+    @Email
+    @NotBlank
     private String email;
 
     public String getNome() {
